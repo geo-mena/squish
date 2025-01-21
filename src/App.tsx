@@ -114,7 +114,7 @@ export function App() {
               <Button
                 variant="secondary"
                 onClick={handleClearAll}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors dark:bg-blue-600 dark:hover:bg-blue-700"
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors dark:bg-blue-600 dark:hover:bg-blue-700"
               >
                 <Trash2 className="w-5 h-5" />
                 Clear All
