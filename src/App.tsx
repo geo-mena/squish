@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Image, Trash2 } from 'lucide-react';
 import { CompressionOptions } from './components/CompressionOptions';
 import { DropZone } from './components/DropZone';
@@ -7,6 +7,7 @@ import { DownloadAll } from './components/DownloadAll';
 import { useImageQueue } from './hooks/useImageQueue';
 import { DEFAULT_QUALITY_SETTINGS } from './utils/formatDefaults';
 import type { ImageFile, OutputType, CompressionOptions as CompressionOptionsType } from './types';
+import { ThemeProvider } from './components/providers/theme-provider';
 
 export function App() {
   const [images, setImages] = useState<ImageFile[]>([]);
@@ -73,48 +74,53 @@ export function App() {
   const completedImages = images.filter(img => img.status === 'complete').length;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Image className="w-8 h-8 text-blue-500" />
-            <h1 className="text-3xl font-bold text-gray-900">Squish</h1>
+    <ThemeProvider>
+      <div className="min-h-screen bg-gray-50 dark:bg-neutral-900">
+        <div className="max-w-4xl mx-auto px-4 py-12">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Image className="w-8 h-8 text-blue-500" />
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                Squish
+              </h1>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400">
+              Compress and convert your images to AVIF, JPEG, JPEG XL, PNG, or
+              WebP
+            </p>
           </div>
-          <p className="text-gray-600">
-            Compress and convert your images to AVIF, JPEG, JPEG XL, PNG, or WebP
-          </p>
-        </div>
 
-        <div className="space-y-6">
-          <CompressionOptions
-            options={options}
-            outputType={outputType}
-            onOptionsChange={setOptions}
-            onOutputTypeChange={handleOutputTypeChange}
-          />
+          <div className="space-y-6">
+            <CompressionOptions
+              options={options}
+              outputType={outputType}
+              onOptionsChange={setOptions}
+              onOutputTypeChange={handleOutputTypeChange}
+            />
 
-          <DropZone onFilesDrop={handleFilesDrop} />
+            <DropZone onFilesDrop={handleFilesDrop} />
 
-          {completedImages > 0 && (
-            <DownloadAll onDownloadAll={handleDownloadAll} count={completedImages} />
-          )}
+            {completedImages > 0 && (
+              <DownloadAll
+                onDownloadAll={handleDownloadAll}
+                count={completedImages}
+              />
+            )}
 
-          <ImageList 
-            images={images} 
-            onRemove={handleRemoveImage} 
-          />
+            <ImageList images={images} onRemove={handleRemoveImage} />
 
-          {images.length > 0 && (
-            <button
-              onClick={handleClearAll}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-            >
-              <Trash2 className="w-5 h-5" />
-              Clear All
-            </button>
-          )}
+            {images.length > 0 && (
+              <button
+                onClick={handleClearAll}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors dark:bg-blue-600 dark:hover:bg-blue-700"
+              >
+                <Trash2 className="w-5 h-5" />
+                Clear All
+              </button>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
