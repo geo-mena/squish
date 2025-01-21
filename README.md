@@ -46,7 +46,7 @@ Squish is built with modern web technologies:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/addyosmani/squish.git
+git clone https://github.com/geo-mena/squish.git
 cd squish
 ```
 
