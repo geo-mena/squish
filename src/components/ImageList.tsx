@@ -14,7 +14,7 @@ export function ImageList({ images, onRemove }: ImageListProps) {
   if (images.length === 0) return null;
 
   return (
-    <Card className="space-y-4">
+    <Card className="space-y-4 rounded-lg">
       {images.map((image) => (
         <div
           key={image.id}
