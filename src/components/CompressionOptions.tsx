@@ -1,4 +1,3 @@
-import React from 'react';
 import type { OutputType, CompressionOptions } from '../types';
 
 interface CompressionOptionsProps {
