@@ -55,7 +55,7 @@ export function ImageList({ images, onRemove }: ImageListProps) {
                 </Button>
               </div>
             </div>
-            <div className="mt-1 flex items-center gap-2 text-sm text-gray-500">
+            <div className="mt-0 flex items-center gap-2 text-sm text-gray-500">
               {image.status === 'pending' && (
                 <span>Ready to process</span>
               )}
