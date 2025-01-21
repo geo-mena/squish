@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { Upload } from 'lucide-react';
 import type { ImageFile } from '../types';
+import { Card } from "../ui/card.tsx";
 
 interface DropZoneProps {
   onFilesDrop: (files: ImageFile[]) => void;
@@ -38,8 +39,8 @@ export function DropZone({ onFilesDrop }: DropZoneProps) {
   }, [onFilesDrop]);
 
   return (
-    <div
-      className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-blue-500 transition-colors"
+    <Card
+      className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-blue-500 transition-colors dark:hover:border-neutral-700"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
@@ -57,14 +58,14 @@ export function DropZone({ onFilesDrop }: DropZoneProps) {
       >
         <Upload className="w-12 h-12 text-gray-400" />
         <div>
-          <p className="text-lg font-medium text-gray-700">
+          <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
             Drop images here or click to upload
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             Supports JPEG, PNG, WebP, AVIF, and JXL
           </p>
         </div>
       </label>
-    </div>
+    </Card>
   );
 }
