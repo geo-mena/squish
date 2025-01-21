@@ -1,8 +1,9 @@
-import React from 'react';
 import { X, CheckCircle, AlertCircle, Loader2, Download } from 'lucide-react';
 import type { ImageFile } from '../types';
 import { formatFileSize } from '../utils/imageProcessing';
 import { downloadImage } from '../utils/download';
+import { Card } from '../ui/card';
+import { Button } from '../ui/button';
 
 interface ImageListProps {
   images: ImageFile[];
@@ -13,11 +14,11 @@ export function ImageList({ images, onRemove }: ImageListProps) {
   if (images.length === 0) return null;
 
   return (
-    <div className="space-y-4">
+    <Card className="space-y-4">
       {images.map((image) => (
         <div
           key={image.id}
-          className="bg-white rounded-lg shadow-sm p-4 flex items-center gap-4"
+          className="bg-white rounded-lg shadow-sm p-4 flex items-center gap-4 dark:bg-neutral-900"
         >
           {image.preview && (
             <img
@@ -28,26 +29,30 @@ export function ImageList({ images, onRemove }: ImageListProps) {
           )}
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-medium text-gray-900 truncate">
+              <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-50">
                 {image.file.name}
               </p>
               <div className="flex items-center gap-2">
                 {image.status === 'complete' && (
-                  <button
+                  <Button
+                    variant="secondary"
+                    size="sm"
                     onClick={() => downloadImage(image)}
                     className="text-gray-400 hover:text-gray-600"
                     title="Download"
                   >
                     <Download className="w-5 h-5" />
-                  </button>
+                  </Button>
                 )}
-                <button
+                <Button
+                  variant="secondary"
+                  size="sm"
                   onClick={() => onRemove(image.id)}
                   className="text-gray-400 hover:text-gray-600"
                   title="Remove"
                 >
                   <X className="w-5 h-5" />
-                </button>
+                </Button>
               </div>
             </div>
             <div className="mt-1 flex items-center gap-2 text-sm text-gray-500">
@@ -94,6 +99,6 @@ export function ImageList({ images, onRemove }: ImageListProps) {
           </div>
         </div>
       ))}
-    </div>
+    </Card>
   );
 }
