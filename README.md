@@ -1,8 +1,8 @@
 <div align="center">
   <p>
-    <h2>
-     Squish 🎨
-    </h2>
+    <h3>
+     Squish - Modern Image Compression Tool 🎨
+    </h3>
   </p>
 
 <a href="https://squish.tofi.pro">
