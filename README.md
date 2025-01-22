@@ -1,14 +1,32 @@
-# Squish 🎨
+<div align="center">
+  <p>
+    <h2>
+     Squish 🎨
+    </h2>
+  </p>
 
+<a href="https://squish.tofi.pro">
+  <img src="public/images/squish.png" alt="Screenshot" />
+</a>
+
+  <p></p>
+
+![Node Badge](https://shields.io/badge/Node-14.17.0-339933?logo=node.js)
+![NPM Badge](https://shields.io/badge/NPM-6.14.13-CB3837?logo=npm)
+![React Badge](https://shields.io/badge/React-17.0.2-61DAFB?logo=react)
+![TypeScript Badge](https://shields.io/badge/TypeScript-4.3.5-3178C6?logo=typescript)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-A modern, browser-based image compression tool that leverages WebAssembly for high-performance image optimization. Squish supports multiple formats and provides an intuitive interface for compressing your images without compromising quality.
+</div>
 
-![](https://squish.addy.ie/meta.jpg)
+## 👨‍🚀 Introduction
+
+A modern, browser-based image compression tool that leverages WebAssembly for high-performance image optimization. Squish supports multiple formats and provides an intuitive interface for compressing your images without compromising quality.
 
 ## ✨ Features
 
 - 🖼️ Support for multiple image formats:
+
   - AVIF (AV1 Image Format)
   - JPEG (using MozJPEG)
   - JPEG XL
@@ -45,22 +63,26 @@ Squish is built with modern web technologies:
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/addyosmani/squish.git
 cd squish
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
 
 4. Build for production:
+
 ```bash
 npm run build
 ```
