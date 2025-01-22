@@ -1,9 +1,9 @@
-import { X, CheckCircle, AlertCircle, Loader2, Download } from 'lucide-react';
-import type { ImageFile } from '../types';
-import { formatFileSize } from '../utils/imageProcessing';
-import { downloadImage } from '../utils/download';
-import { Card } from '../ui/card';
-import { Button } from '../ui/button';
+import { X, CheckCircle, AlertCircle, Loader2, Download } from "lucide-react";
+import type { ImageFile } from "../types";
+import { formatFileSize } from "../utils/imageProcessing";
+import { downloadImage } from "../utils/download";
+import { Card } from "../ui/card";
+import { Button } from "../ui/button";
 
 interface ImageListProps {
   images: ImageFile[];
@@ -14,91 +14,88 @@ export function ImageList({ images, onRemove }: ImageListProps) {
   if (images.length === 0) return null;
 
   return (
-    <Card className="space-y-4 rounded-lg">
+    <div className="space-y-4">
       {images.map((image) => (
-        <div
-          key={image.id}
-          className="bg-white rounded-lg shadow-sm p-4 flex items-center gap-4 dark:bg-neutral-900"
-        >
-          {image.preview && (
-            <img
-              src={image.preview}
-              alt={image.file.name}
-              className="w-16 h-16 object-cover rounded"
-            />
-          )}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between">
-              <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-50">
-                {image.file.name}
-              </p>
-              <div className="flex items-center gap-2">
-                {image.status === 'complete' && (
+        <Card key={image.id} className="rounded-lg">
+          <div className="bg-white rounded-lg shadow-sm p-4 flex items-center gap-4 dark:bg-neutral-900">
+            {image.preview && (
+              <img
+                src={image.preview}
+                alt={image.file.name}
+                className="w-16 h-16 object-cover rounded"
+              />
+            )}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-50">
+                  {image.file.name}
+                </p>
+                <div className="flex items-center gap-2">
+                  {image.status === "complete" && (
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => downloadImage(image)}
+                      className="text-gray-400 hover:text-gray-600"
+                      title="Download"
+                    >
+                      <Download className="w-5 h-5" />
+                    </Button>
+                  )}
                   <Button
                     variant="secondary"
                     size="sm"
-                    onClick={() => downloadImage(image)}
+                    onClick={() => onRemove(image.id)}
                     className="text-gray-400 hover:text-gray-600"
-                    title="Download"
+                    title="Remove"
                   >
-                    <Download className="w-5 h-5" />
+                    <X className="w-5 h-5" />
                   </Button>
+                </div>
+              </div>
+              <div className="mt-0 flex items-center gap-2 text-sm text-gray-500">
+                {image.status === "pending" && <span>Ready to process</span>}
+                {image.status === "processing" && (
+                  <span className="flex items-center gap-2">
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Processing...
+                  </span>
                 )}
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => onRemove(image.id)}
-                  className="text-gray-400 hover:text-gray-600"
-                  title="Remove"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
+                {image.status === "complete" && (
+                  <span className="flex items-center gap-2 text-green-600">
+                    <CheckCircle className="w-4 h-4" />
+                    Complete
+                  </span>
+                )}
+                {image.status === "error" && (
+                  <span className="flex items-center gap-2 text-red-600">
+                    <AlertCircle className="w-4 h-4" />
+                    {image.error || "Error processing image"}
+                  </span>
+                )}
+              </div>
+              <div className="mt-1 text-sm text-gray-500">
+                {formatFileSize(image.originalSize)}
+                {image.compressedSize && (
+                  <>
+                    {" → "}
+                    {formatFileSize(image.compressedSize)}{" "}
+                    <span className="text-green-600">
+                      (
+                      {Math.round(
+                        ((image.originalSize - image.compressedSize) /
+                          image.originalSize) *
+                          100
+                      )}
+                      % smaller)
+                    </span>
+                  </>
+                )}
               </div>
             </div>
-            <div className="mt-0 flex items-center gap-2 text-sm text-gray-500">
-              {image.status === 'pending' && (
-                <span>Ready to process</span>
-              )}
-              {image.status === 'processing' && (
-                <span className="flex items-center gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Processing...
-                </span>
-              )}
-              {image.status === 'complete' && (
-                <span className="flex items-center gap-2 text-green-600">
-                  <CheckCircle className="w-4 h-4" />
-                  Complete
-                </span>
-              )}
-              {image.status === 'error' && (
-                <span className="flex items-center gap-2 text-red-600">
-                  <AlertCircle className="w-4 h-4" />
-                  {image.error || 'Error processing image'}
-                </span>
-              )}
-            </div>
-            <div className="mt-1 text-sm text-gray-500">
-              {formatFileSize(image.originalSize)}
-              {image.compressedSize && (
-                <>
-                  {' → '}
-                  {formatFileSize(image.compressedSize)}{' '}
-                  <span className="text-green-600">
-                    (
-                    {Math.round(
-                      ((image.originalSize - image.compressedSize) /
-                        image.originalSize) *
-                        100
-                    )}
-                    % smaller)
-                  </span>
-                </>
-              )}
-            </div>
           </div>
-        </div>
+        </Card>
       ))}
-    </Card>
+    </div>
   );
 }
