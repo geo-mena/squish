@@ -40,7 +40,7 @@ export function DropZone({ onFilesDrop }: DropZoneProps) {
 
   return (
     <Card
-      className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-blue-500 transition-colors dark:hover:border-neutral-700"
+      className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-blue-500 transition-colors dark:hover:border-blue-800"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >

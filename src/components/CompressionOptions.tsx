@@ -49,7 +49,7 @@ export function CompressionOptions({
               onChange={(e) =>
                 onOptionsChange({ quality: Number(e.target.value) })
               }
-              className="w-full"
+              className="w-full dark:accent-blue-600"
             />
           </div>
         )}
