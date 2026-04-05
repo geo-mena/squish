@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="./public/icon.svg" alt="Squish Icon" width="80" />
+<picture>
+    <source srcset="./.github/icon-dark.svg" media="(prefers-color-scheme: light)">
+    <source srcset="./.github/icon-light.svg" media="(prefers-color-scheme: dark)">
+    <img src="./.github/icon-dark.svg" alt="Squish Icon" width="120" height="120">
+</picture>
 </p>
 
 <h1 align="center">
