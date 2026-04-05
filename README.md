@@ -44,36 +44,10 @@ A live instance is available at [squish.tofi.pro](https://squish.tofi.pro).
 Squish follows a component-based architecture built on React 18 with TypeScript in strict mode, organized into four clearly delineated layers.
 
 ```mermaid
-graph TD
-    subgraph UI["UI Layer — React Components"]
-        A1[DropZone]
-        A2[CompressionOptions]
-        A3[ImageList]
-        A4[DownloadAll]
-    end
-
-    subgraph State["State Management Layer"]
-        B1[useImageQueue]
-    end
-
-    subgraph Logic["Business Logic Layer"]
-        C1[imageProcessing.ts]
-        C2[wasm.ts]
-        C3[canvas.ts]
-        C4[resize.ts]
-    end
-
-    subgraph Codecs["Codec Layer — jSquash WebAssembly"]
-        D1[avif]
-        D2[jpeg]
-        D3[jxl]
-        D4[png]
-        D5[webp]
-    end
-
-    UI --> State
-    State --> Logic
-    Logic --> Codecs
+flowchart LR
+    A[DropZone\nCompressionOptions\nImageList\nDownloadAll] -->|state & events| B[useImageQueue]
+    B -->|encode / decode| C[imageProcessing.ts\nwasm.ts\ncanvas.ts\nresize.ts]
+    C -->|WASM calls| D[avif · jpeg · jxl\npng · webp]
 ```
 
 The **UI Layer** comprises React components responsible for presentation: `DropZone` handles file ingestion, `CompressionOptions` manages format selection and quality adjustment, `ImageList` renders processing status per image, and `DownloadAll` enables batch downloads.
