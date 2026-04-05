@@ -1,9 +1,16 @@
+<p align="center">
+  <img src="./public/icon.svg" alt="Squish Icon" width="80" />
+</p>
+
+<h1 align="center">
+  Squish — Modern Image Compression Tool
+</h1>
+
+<p align="center">
+  Browser-based image compression powered by WebAssembly, with zero server uploads.
+</p>
+
 <div align="center">
-  <p>
-    <h3>
-     Squish - Modern Image Compression Tool
-    </h3>
-  </p>
 
 <a href="https://squish.tofi.pro">
   <img src="public/images/squish.png" alt="Screenshot" />
