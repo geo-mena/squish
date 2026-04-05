@@ -45,26 +45,35 @@ Squish follows a component-based architecture built on React 18 with TypeScript 
 
 ```mermaid
 graph TD
-    A[UI Layer<br/>React Components] --> B[State Management Layer<br/>Custom Hooks]
-    B --> C[Business Logic Layer<br/>Utility Modules]
-    C --> D[Codec Layer<br/>jSquash WebAssembly Modules]
+    subgraph UI["UI Layer — React Components"]
+        A1[DropZone]
+        A2[CompressionOptions]
+        A3[ImageList]
+        A4[DownloadAll]
+    end
 
-    A1[DropZone] --> A
-    A2[CompressionOptions] --> A
-    A3[ImageList] --> A
-    A4[DownloadAll] --> A
+    subgraph State["State Management Layer"]
+        B1[useImageQueue]
+    end
 
-    B1[useImageQueue] --> B
+    subgraph Logic["Business Logic Layer"]
+        C1[imageProcessing.ts]
+        C2[wasm.ts]
+        C3[canvas.ts]
+        C4[resize.ts]
+    end
 
-    C1[imageProcessing.ts] --> C
-    C2[wasm.ts] --> C
-    C3[canvas.ts / resize.ts] --> C
+    subgraph Codecs["Codec Layer — jSquash WebAssembly"]
+        D1[avif]
+        D2[jpeg]
+        D3[jxl]
+        D4[png]
+        D5[webp]
+    end
 
-    D1[@jsquash/avif] --> D
-    D2[@jsquash/jpeg] --> D
-    D3[@jsquash/jxl] --> D
-    D4[@jsquash/png] --> D
-    D5[@jsquash/webp] --> D
+    UI --> State
+    State --> Logic
+    Logic --> Codecs
 ```
 
 The **UI Layer** comprises React components responsible for presentation: `DropZone` handles file ingestion, `CompressionOptions` manages format selection and quality adjustment, `ImageList` renders processing status per image, and `DownloadAll` enables batch downloads.
