@@ -1,7 +1,7 @@
 <div align="center">
   <p>
     <h3>
-     Squish - Modern Image Compression Tool 🎨
+     Squish - Modern Image Compression Tool
     </h3>
   </p>
 
